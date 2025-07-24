@@ -14,10 +14,8 @@
 
 void	ft_errclose(int *pipefd, char *str)
 {
-	if (close(pipefd[0]) == -1)
-		perror("Failed to close pipefd[0]");
-	if (close(pipefd[1]) == -1)
-		perror("Failed to close pipefd[1]");
+	close(pipefd[0]);
+	close(pipefd[1]);
 	perror(str);
 	exit(EXIT_FAILURE);
 }

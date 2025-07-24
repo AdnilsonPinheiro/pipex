@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:05:26 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/24 15:39:15 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:13:59 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 static void	ft_firstchild(char **argv, char **envp, int *pipefd);
 static void	ft_sncdchild(char **argv, char **envp, int *pipefd);
+static void	ft_invalidargs(char *str);
+static int	ft_wait(int *pipefd, int child1, int child2);
 
 int	main(int argc, char **argv, char **envp)
 {
 	int	pipefd[2];
 	int	childpid1;
 	int	childpid2;
-	int	status1;
-	int	status2;
 
 	if (argc != 5)
-	{
-		perror("Invalid Format\n./pipex infile cmd1 cmd2 outfile");
-		return (1);
-	}
+		ft_invalidargs("Invalid format\n./pipex infile cmd1 cmd2 outfile\n");
 	if ((pipe(pipefd) == -1))
 	{
 		perror("Pipe failed");
@@ -43,14 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_errclose(pipefd, "2nd fork failed");
 	if (childpid2 == 0)
 		ft_sncdchild(argv, envp, pipefd);
-	close(pipefd[0]);
-	close(pipefd[1]);
-	waitpid(childpid1, &status1, 0);
-	waitpid(childpid2, &status2, 0);
-	if (WIFEXITED(status2))
-		return (WEXITSTATUS(status2));
-	else
-		return (0);
+	return (ft_wait(pipefd, childpid1, childpid2));
 }
 
 static void	ft_firstchild(char **argv, char **envp, int *pipefd)
@@ -91,4 +81,24 @@ static void	ft_sncdchild(char **argv, char **envp, int *pipefd)
 		ft_errclose(pipefd, "Failed to duplicate pipefd[0] to stdin");
 	close(pipefd[0]);
 	ft_execute(argv[3], envp, pipefd);
+}
+
+static void	ft_invalidargs(char *str)
+{
+	perror(str);
+	exit(EXIT_FAILURE);
+}
+
+static int	ft_wait(int *pipefd, int child1, int child2)
+{
+	int	status1;
+	int	status2;
+
+	close(pipefd[0]);
+	close(pipefd[1]);
+	waitpid(child1, &status1, 0);
+	waitpid(child2, &status2, 0);
+	if (WIFEXITED(status2))
+		return (WEXITSTATUS(status2));
+	return (EXIT_FAILURE);
 }

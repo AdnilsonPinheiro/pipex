@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 16:27:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/24 15:29:50 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/07/24 15:54:40 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_execute(char *argv, char **envp, int *pipefd)
 	char	*path;
 	char	**cmd;
 
-	printf("ft_execute here\n");
 	cmd = ft_split(argv, ' ');
 	if (!cmd)
 		ft_errclose(pipefd, "Split failed in ft_execute");
@@ -44,7 +43,6 @@ static char	*ft_path(char *cmd, char **envp)
 	char	*path_cmd;
 	int		i;
 
-	printf("ft_path here\n");
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
@@ -70,7 +68,6 @@ static void	ft_free(char **str)
 {
 	int	i;
 
-	printf("ft_free here\n");
 	i = 0;
 	if (!str || !*str)
 		return ;
@@ -89,7 +86,6 @@ static char	*ft_str2join(char *path, char *str1, char *str2)
 	char	*temp;
 	char	*dest;
 
-	printf("ft_str2join here \n");
 	if (!path || !str1 || !str2)
 		return (NULL);
 	temp = ft_strjoin(path, str1);

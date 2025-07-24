@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 15:26:44 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/23 18:41:11 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/07/24 15:13:14 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <sys/wait.h>
 
 void	ft_execute(char *argv, char **envp, int *pipefd);
-void	ft_errclose(int **pipefd, int last, char *str);
+void	ft_errclose(int *pipefd, char *str);
 
 #endif

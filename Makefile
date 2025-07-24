@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/21 15:34:37 by adpinhei          #+#    #+#              #
-#    Updated: 2025/07/23 17:38:46 by adpinhei         ###   ########.fr        #
+#    Updated: 2025/07/24 15:44:44 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,11 @@ norm:
 valgrind: $(NAME)
 	@echo "$(YELLOW)Valgrind Report$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
-	--track-origins=yes ./$(NAME) infile "grep a" "wc -w" outfile
+	--track-origins=yes --trace-children=yes \
+	./$(NAME) Makefile "ls" "wc" outfile
+
+gdb: $(NAME)
+	@gdb --tui --args ./$(NAME) Makefile "cat -e" "cat -e" outfile
 
 #Cleanup
 clean:

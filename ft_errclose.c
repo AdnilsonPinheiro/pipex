@@ -12,17 +12,10 @@
 
 #include "pipex.h"
 
-void	ft_errclose(int **pipefd, int last, char *str)
+void	ft_errclose(int *pipefd, char *str)
 {
-	int	i;
-
-	i = 0;
-	while (i <= last)
-	{
-		close(pipefd[i][0]);
-		close(pipefd[i][1]);
-		i++;
-	}
+	close(pipefd[0]);
+	close(pipefd[1]);
 	perror(str);
 	exit(EXIT_FAILURE);
 }

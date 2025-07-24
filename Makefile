@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/21 15:34:37 by adpinhei          #+#    #+#              #
-#    Updated: 2025/07/24 15:44:44 by adpinhei         ###   ########.fr        #
+#    Updated: 2025/07/24 16:38:40 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBFT := $(LIBFT_PATH)/libft.a
 BUILD_DIR := build/
 
 #Source files
-SRC_FILES := main.c ft_execute.c ft_errclose.c
+SRC_FILES := main.c utils.c error.c
 
 #Object files
 OBJ_FILES := $(SRC_FILES:%.c=$(BUILD_DIR)/%.o)

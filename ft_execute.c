@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 16:27:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/24 15:54:40 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:31:30 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*ft_path(char *cmd, char **envp)
 	{
 		path_cmd = ft_str2join(path[i], "/", cmd);
 		if (!path_cmd)
-			perror("path_cmd");
+			return (NULL);
 		if (access(path_cmd, F_OK | X_OK) == 0)
 			return (path_cmd);
 		free(path_cmd);

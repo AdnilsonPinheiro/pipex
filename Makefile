@@ -6,11 +6,13 @@
 #    By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/21 15:34:37 by adpinhei          #+#    #+#              #
-#    Updated: 2025/07/24 16:38:40 by adpinhei         ###   ########.fr        #
+#    Updated: 2025/07/28 20:39:50 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := pipex
+
+BONUS_NAME := pipex_bonus
 
 CC := cc
 
@@ -25,12 +27,19 @@ BUILD_DIR := build/
 #Source files
 SRC_FILES := main.c utils.c error.c
 
+#Bonus files
+BONUS_SRCS := main_bonus.c error_bonus.c utils.c
+
 #Object files
 OBJ_FILES := $(SRC_FILES:%.c=$(BUILD_DIR)/%.o)
 
-.PHONY: all clean fclean re valgrind norm
+BONUS_OBJ := $(BONUS_SRCS:%.c=$(BUILD_DIR)/%.o)
+
+.PHONY: all bonus clean fclean re valgrind norm
 
 all: $(BUILD_DIR) $(LIBFT) $(NAME)
+
+bonus: $(BUILD_DIR) $(LIBFT) $(BONUS_NAME)
 
 #Compile library
 $(LIBFT):
@@ -40,17 +49,22 @@ $(LIBFT):
 $(BUILD_DIR):
 	@mkdir -p $@
 	@echo "$(GREEN)Creating$(RESET) $(BUILD_DIR)"
+	@echo "$(GREEN)Compiled objects$(RESET)"
 
 #Compile object files into build
 $(BUILD_DIR)/%.o: %.c
 	@$(CC) $(FLAGS) -c $< -o $@
-	@echo "$(GREEN)Compiling objects$(RESET)"
 
 #Building executable
 $(NAME): $(OBJ_FILES)
 	@make -C $(LIBFT_PATH)
 	@$(CC) $(FLAGS) $(OBJ_FILES) $(LIBFT) -o $@
 	@echo "$(YELLOW)Compiled$(RESET) $(NAME)"
+
+$(BONUS_NAME): $(BONUS_OBJ)
+	@make -C $(LIBFT_PATH)
+	@$(CC) $(FLAGS) $(BONUS_OBJ) $(LIBFT) -o $@
+	@echo "$(YELLOW)Compiled bonus executable$(RESET) $(BONUS_NAME)"
 
 norm:
 	@norminette -R CheckForbiddenSourceHeader
@@ -61,8 +75,17 @@ valgrind: $(NAME)
 	--track-origins=yes --trace-children=yes \
 	./$(NAME) Makefile "ls" "wc" outfile
 
+bonusvalgrind: $(BONUS_NAME)
+	@echo "$(YELLOW)Valgrind Report$(RESET)"
+	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
+	--track-origins=yes --trace-children=yes \
+	./$(BONUS_NAME) Makefile "cat -e" "cat -e" "cat -e" "cat -e" outfile
+
 gdb: $(NAME)
 	@gdb --tui --args ./$(NAME) Makefile "cat -e" "cat -e" outfile
+
+bonusgdb:
+	@gdb --tui --args ./$(BONUS_NAME) Makefile "cat -e" "cat -e" "cat -e" "cat -e" outfile
 
 #Cleanup
 clean:
@@ -72,8 +95,9 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(BONUS_NAME)
 	@make -C $(LIBFT_PATH) fclean
-	@echo "$(BLUE)Cleaned executable$(RESET) $(NAME)"
+	@echo "$(BLUE)Cleaned executables$(RESET) $(NAME) $(BONUS_NAME)"
 
 re: fclean all
 

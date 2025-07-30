@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 15:37:09 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/30 18:20:28 by adpinhei         ###   ########.fr       */
+/*   Created: 2025/04/30 18:24:07 by adpinhei          #+#    #+#             */
+/*   Updated: 2025/07/30 18:08:36 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *str, int c, size_t n)
+/*joins res to buffer freeing the temp
+basically a strjoin with memory security*/
+char	*ft_free_join(char *stash, char *buffer)
 {
-	unsigned const char	*ustr;
-	unsigned char		uc;
+	char	*temp;
 
-	ustr = (unsigned const char *)str;
-	uc = (unsigned char)c;
-	while (n--)
-	{
-		if (*ustr == uc)
-			return ((void *)ustr);
-		ustr++;
-	}
-	return (NULL);
+	temp = ft_strjoin(stash, buffer);
+	free(stash);
+	return (temp);
 }

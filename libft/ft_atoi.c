@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:57:34 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/04/21 14:05:14 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:19:40 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,3 @@ int	ft_atoi(const char *str)
 	res = res * sign;
 	return (res);
 }
-/*
-#include <stdlib.h>
-#include <stdio.h>
-int	main(void)
-{
-	char	*str = "1322670498";
-	printf("%i\n", ft_atoi(str));
-	printf("%i\n", atoi(str));
-}*/

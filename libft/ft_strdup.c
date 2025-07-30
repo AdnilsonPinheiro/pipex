@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:02:26 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/24 11:16:14 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:21:00 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,3 @@ char	*ft_strdup(const char *s)
 	ft_memcpy(dest, s, (length + 1));
 	return (dest);
 }
-/*
-#include <stdio.h>
-int     main(void)
-{
-	const char  s[] = "lorem ipsum dolor sit amet";
-	printf("%s\n", strdup(s));
-	printf("%s\n", ft_strdup(s));
-	printf("%p\n", strdup(s));
-	printf("%p\n", ft_strdup(s));
-}*/

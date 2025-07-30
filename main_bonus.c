@@ -6,14 +6,13 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:17:50 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/30 17:55:02 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:17:02 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <signal.h>
 
-//static void	ft_here(int argc, char **argv, char **envp);
 static void	ft_process(char *argv, char **envp);
 
 int	main(int argc, char **argv, char **envp)
@@ -26,17 +25,24 @@ int	main(int argc, char **argv, char **envp)
 	else if (argc >= 5)
 	{
 		if ((ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1]))) == 0)
-			perror("here");
+		{
+			pipefd[1] = ft_open(argv[argc - 1], 2);
+			dup2(pipefd[1], STDOUT_FILENO);
+			ft_close(pipefd[0], pipefd[1]);
+			while (ft_strncmp(get_next_line(0), argv[2], ft_strlen(argv[2])))
+				ft_putstr_fd("here_doc>", 1);
+			i = 3;
+			while (i < argc - 2)
+				ft_process(argv[i++], envp);
+			ft_execute(argv[argc - 2], envp, pipefd);
+		}
 		else
 		{
-			printf("got to else");
 			pipefd[0] = ft_open(argv[1], 0);
 			dup2(pipefd[0], STDIN_FILENO);
-			printf("opened pipefd[0]");
 			pipefd[1] = ft_open(argv[argc - 1], 1);
 			dup2(pipefd[1], STDOUT_FILENO);
 			ft_close(pipefd[0], pipefd[1]);
-			printf("opened pipefd[1]");
 			i = 2;
 			while (i < argc - 2)
 				ft_process(argv[i++], envp);
@@ -44,17 +50,6 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 }
-
-// static void	ft_here(int argc, char **argv, char **envp)
-// {
-// 	int	i;
-
-// 	if (argc < 6)
-// 	{
-// 		ft_putstr_fd("Error! ./pipex here_doc LIMITER cmds outfile", 2);
-// 		exit (EXIT_SUCCESS);
-// 	}
-// }
 
 static void	ft_process(char *argv, char **envp)
 {

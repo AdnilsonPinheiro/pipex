@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:05:26 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/28 15:55:50 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/07/29 18:45:31 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	ft_wait(int *pipefd, int child1, int child2);
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	pipefd[2];
-	int	childpid1;
-	int	childpid2;
+	int		pipefd[2];
+	pid_t	childpid1;
+	pid_t	childpid2;
 
 	if (argc != 5)
 		ft_invalidargs("Invalid format\n./pipex infile cmd1 cmd2 outfile\n");
@@ -89,7 +89,7 @@ static void	ft_invalidargs(char *str)
 	exit(EXIT_FAILURE);
 }
 
-static int	ft_wait(int *pipefd, int child1, int child2)
+static int	ft_wait(int *pipefd, pid_t child1, pid_t child2)
 {
 	int	status1;
 	int	status2;

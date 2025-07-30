@@ -6,27 +6,20 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 16:23:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/28 18:00:43 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/07/30 17:18:13 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_cleanpipe(t_pipex *ppx, int size)
+void	ft_close(int fd1, int fd2)
 {
-	int	i;
-
-	i = 0;
-	while (i <= size)
-	{
-		close(ppx->pipefd[i][0]);
-		close(ppx->pipefd[i][1]);
-		i++;
-	}
-	free(*(ppx->pipefd));
-	*(ppx->pipefd) = NULL;
-	ppx->pipefd = NULL;
+	if (fd1 >= 0)
+		close(fd1);
+	if (fd2 >= 0)
+		close(fd2);
 }
+
 void	ft_errclose(int *pipefd, char *str)
 {
 	close(pipefd[0]);

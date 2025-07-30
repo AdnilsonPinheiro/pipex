@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/21 15:34:37 by adpinhei          #+#    #+#              #
-#    Updated: 2025/07/28 20:39:50 by adpinhei         ###   ########.fr        #
+#    Updated: 2025/07/30 15:13:27 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ BUILD_DIR := build/
 SRC_FILES := main.c utils.c error.c
 
 #Bonus files
-BONUS_SRCS := main_bonus.c error_bonus.c utils.c
+BONUS_SRCS := main_bonus.c error_bonus.c utils.c utils_bonus.c
 
 #Object files
 OBJ_FILES := $(SRC_FILES:%.c=$(BUILD_DIR)/%.o)

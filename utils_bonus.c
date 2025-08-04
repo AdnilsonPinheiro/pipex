@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 16:27:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/30 18:24:03 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/04 19:20:54 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_open(char *file, int mod)
 	if (mod == 1)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (mod == 2)
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		fd = open(file, O_RDWR | O_CREAT | O_APPEND, 0777);
 	if (fd == -1)
 		perror("Failed at ft_open");
 	return (fd);

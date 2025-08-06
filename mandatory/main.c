@@ -6,11 +6,11 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:05:26 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/29 18:45:31 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/06 15:29:22 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 static void	ft_firstchild(char **argv, char **envp, int *pipefd);
 static void	ft_sncdchild(char **argv, char **envp, int *pipefd);
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_errclose(pipefd, "2nd fork failed");
 	if (childpid2 == 0)
 		ft_sncdchild(argv, envp, pipefd);
-	return (ft_wait(pipefd, childpid1, childpid2));
+	ft_wait(pipefd, childpid1, childpid2);
 }
 
 static void	ft_firstchild(char **argv, char **envp, int *pipefd)
@@ -85,7 +85,7 @@ static void	ft_sncdchild(char **argv, char **envp, int *pipefd)
 
 static void	ft_invalidargs(char *str)
 {
-	perror(str);
+	ft_putstr_fd(str, 1);
 	exit(EXIT_FAILURE);
 }
 

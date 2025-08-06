@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 15:26:44 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/06 14:55:24 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/06 15:09:04 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <sys/wait.h>
-
-typedef struct t_pipe
-{
-	int		fd_in;
-	int		fd_out;
-	pid_t	pid;
-}	t_pipe;
 
 /*mandatory functions*/
 void	ft_execute(char *argv, char **envp, int *pipefd);

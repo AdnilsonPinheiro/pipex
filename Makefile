@@ -6,13 +6,13 @@
 #    By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/21 15:34:37 by adpinhei          #+#    #+#              #
-#    Updated: 2025/08/06 15:05:28 by adpinhei         ###   ########.fr        #
+#    Updated: 2025/08/06 15:23:46 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := pipex
 
-BONUS_NAME := pipex
+BONUS_NAME := pipex_bonus
 
 CC := cc
 
@@ -25,11 +25,11 @@ LIBFT := $(LIBFT_PATH)/libft.a
 BUILD_DIR := build/
 
 #Source files
-SRC_FILES := main.c utils.c error.c
+SRC_FILES := mandatory/main.c utils.c mandatory/error.c
 
 #Bonus files
-BONUS_SRCS := main_bonus.c error_bonus.c utils.c utils_bonus.c\
-			ft_here.c
+BONUS_SRCS := bonus/main.c bonus/error_bonus.c utils.c bonus/utils_bonus.c\
+			bonus/ft_here.c
 
 #Object files
 OBJ_FILES := $(SRC_FILES:%.c=$(BUILD_DIR)/%.o)
@@ -54,6 +54,7 @@ $(BUILD_DIR):
 
 #Compile object files into build
 $(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 #Building executable

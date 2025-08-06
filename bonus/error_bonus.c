@@ -6,11 +6,11 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 16:23:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/30 17:18:13 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/06 15:17:46 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 void	ft_close(int fd1, int fd2)
 {

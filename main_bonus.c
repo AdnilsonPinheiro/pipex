@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:17:50 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/04 19:21:40 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/06 15:02:27 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	ft_process(char *argv, char **envp);
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	pipefd[2];
+	int	fd_in;
+	int	fd_out;
 	int	i;
 
 	if (argc < 5)
@@ -25,19 +26,24 @@ int	main(int argc, char **argv, char **envp)
 	else if (argc >= 5)
 	{
 		if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
-			ft_here(argc, argv, envp);
+		{
+			ft_here(argv);
+			fd_in = ft_open("/tmp/here_doc", 0);
+			i = 3;
+		}
 		else
 		{
-			pipefd[0] = ft_open(argv[1], 0);
-			dup2(pipefd[0], STDIN_FILENO);
-			pipefd[1] = ft_open(argv[argc - 1], 1);
-			dup2(pipefd[1], STDOUT_FILENO);
-			ft_close(pipefd[0], pipefd[1]);
+			fd_in = ft_open(argv[1], 0);
 			i = 2;
-			while (i < argc - 2)
-				ft_process(argv[i++], envp);
-			ft_execute(argv[argc - 2], envp, pipefd);
 		}
+		fd_out = ft_open(argv[argc - 1], 1);
+		dup2(fd_in, STDIN_FILENO);
+		dup2(fd_out, STDOUT_FILENO);
+		ft_close(fd_in, fd_out);
+		while (i < argc - 2)
+			ft_process(argv[i++], envp);
+		unlink("/tmp/here_doc");
+		ft_execute(argv[argc - 2], envp, NULL);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:17:50 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/07 20:25:50 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/07 20:32:41 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static void	ft_invalidargs(char *str);
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	fd_in;
-	int	fd_out;
+	int	fd[2];
 	int	i;
 
 	if (argc < 5)
@@ -26,19 +25,19 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
 		ft_here(argv);
-		fd_in = ft_open("/tmp/here_doc", 0);
-		fd_out = ft_open(argv[argc - 1], 2);
+		fd[0] = ft_open("/tmp/here_doc", 0);
+		fd[1] = ft_open(argv[argc - 1], 2);
 		i = 3;
 	}
 	else
 	{
-		fd_in = ft_open(argv[1], 0);
-		fd_out = ft_open(argv[argc - 1], 1);
+		fd[0] = ft_open(argv[1], 0);
+		fd[1] = ft_open(argv[argc - 1], 1);
 		i = 2;
 	}
-	dup2(fd_in, STDIN_FILENO);
-	dup2(fd_out, STDOUT_FILENO);
-	ft_close(fd_in, fd_out);
+	dup2(fd[0], STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
+	ft_close(fd[0], fd[1]);
 	while (i < argc - 2)
 		ft_process(argv[i++], envp);
 	unlink("/tmp/here_doc");

@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 16:27:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/07 19:37:23 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/07 20:30:54 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ft_path(char *cmd, char **envp)
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
 	if (envp[i] == NULL)
-		return(ft_putstr_fd("PATH not found\n", 2), NULL);
+		return (ft_putstr_fd("PATH not found\n", 2), NULL);
 	path = ft_split(envp[i] + 5, ':');
 	if (!path)
 		return (NULL);

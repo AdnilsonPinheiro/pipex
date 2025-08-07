@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:17:50 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/07 18:51:31 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/07 20:25:50 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ int	main(int argc, char **argv, char **envp)
 	{
 		ft_here(argv);
 		fd_in = ft_open("/tmp/here_doc", 0);
+		fd_out = ft_open(argv[argc - 1], 2);
 		i = 3;
 	}
 	else
 	{
 		fd_in = ft_open(argv[1], 0);
+		fd_out = ft_open(argv[argc - 1], 1);
 		i = 2;
 	}
-	fd_out = ft_open(argv[argc - 1], 1);
 	dup2(fd_in, STDIN_FILENO);
 	dup2(fd_out, STDOUT_FILENO);
 	ft_close(fd_in, fd_out);

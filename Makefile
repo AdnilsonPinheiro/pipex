@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/21 15:34:37 by adpinhei          #+#    #+#              #
-#    Updated: 2025/08/07 19:22:48 by adpinhei         ###   ########.fr        #
+#    Updated: 2025/08/07 19:59:27 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ bonusvalgrind: $(BONUS_NAME)
 	@echo "$(YELLOW)Valgrind Report$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
 	--track-origins=yes --trace-children=yes \
-	./$(BONUS_NAME) Makefile uba uba uba eh outfile
+	./$(BONUS_NAME) infile "cat" "wc -c" "ls"  outfile
 
 gdb: $(NAME)
 	@gdb --tui --args ./$(NAME) Makefile "cat -e" "cat -e" outfile

@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 15:26:44 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/06 15:09:04 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:37:11 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 /*mandatory functions*/
 void	ft_execute(char *argv, char **envp, int *pipefd);

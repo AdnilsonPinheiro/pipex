@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 16:27:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/30 15:13:57 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:37:23 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ void	ft_execute(char *argv, char **envp, int *pipefd)
 
 	cmd = ft_split(argv, ' ');
 	if (!cmd)
-		ft_errclose(pipefd, "Split failed in ft_execute");
+		ft_errclose(pipefd, "Split failed in ft_execute\n");
 	path = ft_path(cmd[0], envp);
 	if (!path)
 	{
 		ft_free(cmd);
-		ft_errclose(pipefd, "Failed to find path");
+		ft_errclose(pipefd, "Failed to find command\n");
 	}
 	execve(path, cmd, envp);
 	ft_free(cmd);
 	free(path);
 	path = NULL;
-	ft_errclose(pipefd, "execve failed");
+	ft_errclose(pipefd, "execve failed\n");
 }
 
 static char	*ft_path(char *cmd, char **envp)
@@ -46,19 +46,20 @@ static char	*ft_path(char *cmd, char **envp)
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
+	if (envp[i] == NULL)
+		return(ft_putstr_fd("PATH not found\n", 2), NULL);
 	path = ft_split(envp[i] + 5, ':');
 	if (!path)
 		return (NULL);
 	i = 0;
-	while (path[i])
+	while (path[i++])
 	{
 		path_cmd = ft_str2join(path[i], "/", cmd);
 		if (!path_cmd)
-			return (NULL);
+			return (ft_free(path), NULL);
 		if (access(path_cmd, F_OK | X_OK) == 0)
-			return (path_cmd);
+			return (ft_free(path), path_cmd);
 		free(path_cmd);
-		i++;
 	}
 	ft_free(path);
 	return (NULL);

@@ -6,12 +6,15 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:15:28 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/08 17:18:42 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/08 17:23:59 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*In order for the here_doc in pipex bonus to work,
+STASH was converted in a file static, instead of the previous
+function static*/
 static char	*stash = NULL;
 
 /*clears stash after done with it
@@ -107,7 +110,6 @@ char	*ft_update(char *stash)
 
 char	*get_next_line(int fd)
 {
-//	static char	*stash;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

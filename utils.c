@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 16:27:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/07 20:30:54 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/08 16:25:15 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void	ft_execute(char *argv, char **envp, int *pipefd)
 	if (!path)
 	{
 		ft_free(cmd);
-		ft_errclose(pipefd, "Failed to find command\n");
+		ft_close(pipefd[0], pipefd[1]);
+		ft_putstr_fd("Failed to find command\n", 2);
+		return ;
 	}
 	execve(path, cmd, envp);
 	ft_free(cmd);

@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 16:23:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/07 19:32:04 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/08 16:05:27 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_close(int fd1, int fd2)
 
 void	ft_errclose(int *pipefd, char *str)
 {
-	(void)pipefd;
 	if (pipefd)
 	{
 		if (pipefd[0] != -1)

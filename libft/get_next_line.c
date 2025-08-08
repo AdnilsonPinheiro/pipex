@@ -6,11 +6,25 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:15:28 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/30 18:04:21 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/08 17:18:42 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static char	*stash = NULL;
+
+/*clears stash after done with it
+created for pipex bonus, in order to 
+prevent memory leaks after implementing here_doc*/
+void	get_next_line_clear(void)
+{
+	if (stash)
+	{
+		free (stash);
+		stash = NULL;
+	}
+}
 
 /*reads file into the buffer
 updates the stash
@@ -93,7 +107,7 @@ char	*ft_update(char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+//	static char	*stash;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

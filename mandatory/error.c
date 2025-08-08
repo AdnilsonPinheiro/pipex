@@ -12,6 +12,14 @@
 
 #include "../pipex.h"
 
+void	ft_close(int fd1, int fd2)
+{
+	if (fd1 >= 0)
+		close(fd1);
+	if (fd2 >= 0)
+		close(fd2);
+}
+
 void	ft_errclose(int *pipefd, char *str)
 {
 	close(pipefd[0]);

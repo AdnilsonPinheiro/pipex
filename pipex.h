@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 15:26:44 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/07 19:37:11 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/08 17:11:12 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	ft_errclose(int *pipefd, char *str);
 void	ft_close(int fd1, int fd2);
 int		ft_open(char *file, int mod);
 void	ft_here(char **argv);
+void	get_next_line_clear(void);
 
 #endif

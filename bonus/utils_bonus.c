@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 16:27:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/07 15:54:37 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/08 16:02:23 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_open(char *file, int mod)
 	if (fd == -1)
 	{
 		ft_putstr_fd("Failed at ft_open", 2);
-		exit(EXIT_SUCCESS);
+		exit(EXIT_FAILURE);
 	}
 	return (fd);
 }

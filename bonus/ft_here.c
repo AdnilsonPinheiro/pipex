@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 15:23:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/06 15:34:50 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/08 17:10:23 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ void	ft_here(char **argv)
 	{
 		ft_putstr_fd("here_doc> ", 1);
 		input = get_next_line(STDIN_FILENO);
-		if ((ft_strncmp(eof, input, ft_strlen(input))) == 0)
+		if (((ft_strncmp(eof, input, ft_strlen(input))) == 0) || !input)
 			break ;
 		ft_putstr_fd(input, tmp);
 		free(input);
 	}
+	get_next_line_clear();
 	free(eof);
 	free(input);
 	close(tmp);

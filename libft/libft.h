@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 20:50:47 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/07/30 18:16:31 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/08 17:10:47 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ char	*ft_free_join(char *stash, char *buffer);
 char	*ft_read_file(int fd, char *res);
 char	*ft_line(char *stash);
 char	*ft_update(char *stash);
+void	get_next_line_clear(void);
 
 #endif

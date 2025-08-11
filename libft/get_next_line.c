@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 16:15:28 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/08 17:23:59 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:43:51 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 /*In order for the here_doc in pipex bonus to work,
 STASH was converted in a file static, instead of the previous
 function static*/
-static char	*stash = NULL;
+static char	*g_stash = NULL;
 
 /*clears stash after done with it
 created for pipex bonus, in order to 
 prevent memory leaks after implementing here_doc*/
 void	get_next_line_clear(void)
 {
-	if (stash)
+	if (g_stash)
 	{
-		free (stash);
-		stash = NULL;
+		free (g_stash);
+		g_stash = NULL;
 	}
 }
 
@@ -114,19 +114,19 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!stash)
+	if (!g_stash)
 	{
-		stash = malloc(sizeof(char) * 1);
-		if (!stash)
+		g_stash = malloc(sizeof(char) * 1);
+		if (!g_stash)
 			return (NULL);
-		stash[0] = '\0';
+		g_stash[0] = '\0';
 	}
-	stash = ft_read_file(fd, stash);
-	if (!stash)
+	g_stash = ft_read_file(fd, g_stash);
+	if (!g_stash)
 		return (NULL);
-	line = ft_line(stash);
+	line = ft_line(g_stash);
 	if (!line)
-		return (free(stash), stash = NULL, NULL);
-	stash = ft_update(stash);
+		return (free(g_stash), g_stash = NULL, NULL);
+	g_stash = ft_update(g_stash);
 	return (line);
 }

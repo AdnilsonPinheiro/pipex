@@ -6,60 +6,39 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:17:50 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/08 16:33:55 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/11 16:35:23 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
 static pid_t	ft_process(char *argv, char **envp);
-static void	ft_invalidargs(char *str);
+static void		ft_invalidargs(char *str);
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	fd[2];
-	int	i;
-	pid_t	*pids;
-	int	pid_count;
-	int	j;
+	p_struct	*ppx;
 
-	pid_count = 0;
+	ppx = malloc(sizeof(p_struct));
+	if (!ppx)
+		return (ft_putstr_fd("Failed to allocate for p_struct *ppx\n", 2), 0);
 	if (argc < 5)
 		ft_invalidargs("Error! Try ./pipex infile cmd1...cmdN outfile");
-	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
+	else if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
 		ft_here(argv);
-		fd[0] = ft_open("/tmp/here_doc", 0);/*fd init passing & of fd and & of i?*/
-		i = 3;
-		pids = malloc(sizeof(pid_t) * (argc - 4));
-		if (!pids)
-			ft_errclose(fd, "pids failed\n");
+		ft_init(ppx, argc, argv, envp);
 	}
 	else
-	{
-		fd[0] = ft_open(argv[1], 0);
-		i = 2;
-		pids = malloc(sizeof(pid_t) * (argc - 3));
-		if (!pids)
-			ft_errclose(fd, "pids failed\n");
-	}
-	dup2(fd[0], STDIN_FILENO);
-	close (fd[0]);
-	while (i < argc - 2)
-		pids[pid_count++] = ft_process(argv[i++], envp);
-	pids[pid_count++] = fork();
-	if (pids[pid_count - 1] == 0)
-	{
-		fd[1] = ft_open(argv[argc - 1], 1);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		ft_execute(argv[argc - 2], envp, NULL);
-	}
-	j = -1;
-	while (++j < pid_count)
-		waitpid(pids[j], NULL, 0);
-	unlink("/tmp/here_doc");
-	free (pids);
+		ft_init(ppx, argc, argv, envp);
+	dup2(ppx->fd_in, STDIN_FILENO);
+	close (ppx->fd_in);
+	while (ppx->first_cmd < argc - 2)
+		ppx->pids[ppx->pid_count++] = ft_process(argv[ppx->first_cmd++], envp);
+	ppx->pids[ppx->pid_count++] = fork();
+	if (ppx->pids[ppx->pid_count - 1] == 0)
+		ft_last(ppx, argv[argc - 1]);
+	ft_wait_bonus(ppx);
 }
 
 static pid_t	ft_process(char *argv, char **envp)

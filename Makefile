@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/21 15:34:37 by adpinhei          #+#    #+#              #
-#    Updated: 2025/08/08 17:17:14 by adpinhei         ###   ########.fr        #
+#    Updated: 2025/08/11 16:38:45 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC_FILES := mandatory/main.c utils.c mandatory/error.c
 
 #Bonus files
 BONUS_SRCS := bonus/main.c bonus/error_bonus.c utils.c bonus/utils_bonus.c\
-			bonus/ft_here.c libft/get_next_line.c
+			bonus/ft_here.c bonus/ft_struct.c\
+			libft/get_next_line.c
 
 #Object files
 OBJ_FILES := $(SRC_FILES:%.c=$(BUILD_DIR)/%.o)
@@ -81,7 +82,7 @@ bonusvalgrind: $(BONUS_NAME)
 	@echo "$(YELLOW)Valgrind Report$(RESET)"
 	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
 	--track-origins=yes --trace-children=yes \
-	./$(BONUS_NAME) here_doc eof "cat -e" "cat -e" outfile
+	./$(BONUS_NAME) Makefile "cat -e" "cat -e" outfile
 
 gdb: $(NAME)
 	@gdb --tui --args ./$(NAME) Makefile "cat -e" "cat -e" outfile

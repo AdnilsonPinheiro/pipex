@@ -6,13 +6,13 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 16:30:59 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/11 16:34:44 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/12 16:21:05 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	ft_init(p_struct *ppx, int argc, char **argv, char **envp)
+void	ft_init(t_pipe *ppx, int argc, char **argv, char **envp)
 {
 	ppx->pid_count = 0;
 	ppx->argc = argc;
@@ -33,7 +33,7 @@ void	ft_init(p_struct *ppx, int argc, char **argv, char **envp)
 		ft_putstr_fd("Error! Failed to malloc in ft_init\n", 2);
 }
 
-void	ft_wait_bonus(p_struct *ppx)
+void	ft_wait_bonus(t_pipe *ppx)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ void	ft_wait_bonus(p_struct *ppx)
 	unlink("/tmp/here_doc");
 }
 
-void	ft_last(p_struct *ppx, char *outfile)
+void	ft_last(t_pipe *ppx, char *outfile)
 {
 	if (ft_strncmp(ppx->argv[1], "here_doc", ft_strlen(ppx->argv[1])) == 0)
 		ppx->fd_out = ft_open(outfile, APPEND);

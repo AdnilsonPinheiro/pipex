@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:17:50 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/11 16:35:23 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/12 16:22:28 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ static void		ft_invalidargs(char *str);
 
 int	main(int argc, char **argv, char **envp)
 {
-	p_struct	*ppx;
+	t_pipe	*ppx;
 
-	ppx = malloc(sizeof(p_struct));
+	ppx = malloc(sizeof(t_pipe));
 	if (!ppx)
-		return (ft_putstr_fd("Failed to allocate for p_struct *ppx\n", 2), 0);
+		ft_putstr_fd("Failed to allocate for t_pipe *ppx\n", 2);
 	if (argc < 5)
+	{
+		free(ppx);
 		ft_invalidargs("Error! Try ./pipex infile cmd1...cmdN outfile");
+	}
 	else if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
 		ft_here(argv);

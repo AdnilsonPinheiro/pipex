@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/21 15:34:37 by adpinhei          #+#    #+#              #
-#    Updated: 2025/08/11 16:38:45 by adpinhei         ###   ########.fr        #
+#    Updated: 2025/08/12 16:43:23 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,7 @@ $(BUILD_DIR)/%.o: %.c
 	@$(CC) $(FLAGS) -c $< -o $@
 
 #Building executable
-$(NAME): $(OBJ_FILES)
-	@make -C $(LIBFT_PATH)
+$(NAME): $(OBJ_FILES) $(LIBFT)
 	@$(CC) $(FLAGS) $(OBJ_FILES) $(LIBFT) -o $@
 	@echo "$(YELLOW)Compiled$(RESET) $(NAME)"
 
@@ -104,6 +103,21 @@ fclean: clean
 
 re: fclean all
 
+#Help
+help:
+	@echo "$(YELLOW)Available targets:$(RESET)"
+	@echo "  all           - Build the mandatory executable"
+	@echo "  bonus         - Build the bonus executable"
+	@echo "  clean         - Remove object files"
+	@echo "  fclean        - Remove all built files"
+	@echo "  re            - Clean and rebuild everything"
+	@echo "  norm          - Run norminette checks"
+	@echo "  valgrind      - Run valgrind on mandatory"
+	@echo "  bonusvalgrind - Run valgrind on bonus"
+	@echo "  gdb           - Start gdb on mandatory"
+	@echo "  bonusgdb      - Start gdb on bonus"
+
+
 #Color editing
 RED = \033[1;31m
 
@@ -113,4 +127,4 @@ YELLOW = \033[1;33m
 
 BLUE = \033[1;34m
 
-RESET = \033[0m
+RESET = \033[0m 

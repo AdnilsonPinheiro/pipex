@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:05:26 by adpinhei          #+#    #+#             */
-/*   Updated: 2025/08/06 15:29:22 by adpinhei         ###   ########.fr       */
+/*   Updated: 2025/08/12 20:08:24 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ static int	ft_wait(int *pipefd, pid_t child1, pid_t child2)
 	int	status1;
 	int	status2;
 
+	status1 = -1;
+	status2 = -1;
 	close(pipefd[0]);
 	close(pipefd[1]);
 	waitpid(child1, &status1, 0);

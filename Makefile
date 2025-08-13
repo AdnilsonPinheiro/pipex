@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/21 15:34:37 by adpinhei          #+#    #+#              #
-#    Updated: 2025/08/12 16:43:23 by adpinhei         ###   ########.fr        #
+#    Updated: 2025/08/13 20:12:54 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ bonus: $(BUILD_DIR) $(LIBFT) $(BONUS_NAME)
 
 #Compile library
 $(LIBFT):
-	@make -C $(LIBFT_PATH)
+	@make --no-print-directory -C $(LIBFT_PATH)
 
 #Create build directory if it doesn't exist
 $(BUILD_DIR):
@@ -64,7 +64,7 @@ $(NAME): $(OBJ_FILES) $(LIBFT)
 	@echo "$(YELLOW)Compiled$(RESET) $(NAME)"
 
 $(BONUS_NAME): $(BONUS_OBJ)
-	@make -C $(LIBFT_PATH)
+	@make --no-print-directory -C $(LIBFT_PATH)
 	@$(CC) $(FLAGS) $(BONUS_OBJ) $(LIBFT) -o $@
 	@echo "$(YELLOW)Compiled bonus executable$(RESET) $(BONUS_NAME)"
 
@@ -92,13 +92,13 @@ bonusgdb:
 #Cleanup
 clean:
 	@rm -rf $(BUILD_DIR)
-	@make -C $(LIBFT_PATH) clean
+	@make --no-print-directory -C $(LIBFT_PATH) clean
 	@echo "$(BLUE)Cleaned object files$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(BONUS_NAME)
-	@make -C $(LIBFT_PATH) fclean
+	@make --no-print-directory -C $(LIBFT_PATH) fclean
 	@echo "$(BLUE)Cleaned executables$(RESET) $(NAME) $(BONUS_NAME)"
 
 re: fclean all
